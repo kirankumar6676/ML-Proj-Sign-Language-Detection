@@ -80,6 +80,56 @@ Fix Alerts
                 <input type="text" id="new-word" placeholder="New Gesture Title">
                 <input type="submit" id="submit-word" value="Add Word &#9658;">
             </form>
+
+            <div id="translatedText" style="padding: 20px;font-size: 30px;color: blue;"></div>
+
+    <script>
+        // English to Tamil translation dictionary
+        var translationDictionary = {
+            "hello": "வணக்கம்",
+            "thankyou": "நன்றி",
+            "yes": "ஆம்",
+            "no": "இல்லை",
+            "start": "தொடக்கம்",
+            "stop": "நிறுத்து",
+            "iloveyou": "நான் உன்னை காதலிக்கிறேன்",
+            "help": "உதவி",
+            "bye": "வருக"
+            // Add more translations here
+        };
+
+        // Function to translate text
+        function translateText(text) {
+            var translatedText = '';
+
+            // Split input text into words and translate each word
+            var words = text.toLowerCase().split(' ');
+            for (var i = 0; i < words.length; i++) {
+                var word = words[i];
+                if (translationDictionary.hasOwnProperty(word)) {
+                    translatedText += translationDictionary[word] + ' ';
+                } else {
+                    // If word not found in dictionary, keep it as it is
+                    translatedText += word + ' ';
+                }
+            }
+
+            // Update the output element with translated text
+            document.getElementById('translatedText').textContent = translatedText.trim();
+        }
+
+        // Get input element
+        var input = document.getElementById('new-word');
+
+        // Listen for input event on input element
+        input.addEventListener('input', function() {
+            // Get input value
+            var inputValue = input.value;
+
+            // Translate the input value
+            translateText(inputValue);
+        });
+    </script>
             <button id="doneRetrain" class="doneRetrain">Done Retraining</button>
 
             <div id="trainingCommands"></div>
